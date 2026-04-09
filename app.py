@@ -33,23 +33,26 @@ def get_sheet():
         "https://spreadsheets.google.com/feeds",
         "https://www.googleapis.com/auth/drive"
     ]
-    # Streamlit Cloud用：st.secretsから読む
-    if "gcp_service_account" in st.secrets:
-        creds = Credentials.from_service_account_info(
-            st.secrets["gcp_service_account"], scopes=scope
+    try:
+        if "gcp_service_account" in st.secrets:
+            creds = Credentials.from_service_account_info(
+                st.secrets["gcp_service_account"], scopes=scope
+            )
+        else:
+            json_files = [f for f in os.listdir('.') if f.endswith('.json')]
+            if not json_files:
+                st.error("❌ JSONファイルが見つかりません")
+                return None
+            creds = Credentials.from_service_account_file(json_files[0], scopes=scope)
+        
+        client = gspread.authorize(creds)
+        sheet = client.open_by_url(
+            "https://docs.google.com/spreadsheets/d/1cZLM0EVl7CkIOC_yh10_m-QhuX2q0IJeoyaqC8teRs4"
         )
-    else:
-        # ローカル用：JSONファイルから読む
-        json_files = [f for f in os.listdir('.') if f.endswith('.json')]
-        if not json_files:
-            return None
-        creds = Credentials.from_service_account_file(json_files[0], scopes=scope)
-    
-    client = gspread.authorize(creds)
-    sheet = client.open_by_url(
-        "https://docs.google.com/spreadsheets/d/1cZLM0EVl7CkIOC_yh10_m-QhuX2q0IJeoyaqC8teRs4"
-    )
-    return sheet.worksheet("results")
+        return sheet.worksheet("results")
+    except Exception as e:
+        st.error(f"❌ Sheets接続エラー：{e}")
+        return None
 
 
 def save_to_sheet(ws, d, r):
