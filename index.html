@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資金調達 審査スコアリングシステム | Nexcess</title>
+<style>
+:root {
+  --navy:      #1a2f4e;
+  --navy-dk:   #111f35;
+  --teal:      #1D9E75;
+  --teal-dk:   #0F6E56;
+  --teal-bg:   #e1f5ee;
+  --bg:        #f0f3f7;
+  --surface:   #ffffff;
+  --surf2:     #f7f9fc;
+  --border:    #d4dce8;
+  --border2:   #eaeff6;
+  --text:      #1a2f4e;
+  --text2:     #4a607a;
+  --text3:     #94a8bb;
+  --green:     #085041;
+  --green-bg:  #e1f5ee;
+  --green-bdr: #1D9E75;
+  --lime:      #27500A;
+  --lime-bg:   #eaf3de;
+  --lime-bdr:  #639922;
+  --red:       #791F1F;
+  --red-bg:    #fcebeb;
+  --red-bdr:   #E24B4A;
+  --amber:     #633806;
+  --amber-bg:  #FAEEDA;
+  --amber-bdr: #EF9F27;
+  --warn-bg:   #fff3e0;
+  --warn-bdr:  #e8950a;
+  --err-bg:    #fdecea;
+  --err-bdr:   #d94a3a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Header ─── */
+header {
+  background: var(--navy);
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(17,31,53,0.3);
+}
+.header-inner {
+  max-width: 900px; margin: 0 auto;
+  height: 54px; padding: 0 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.logo-box {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #fff; font-weight: 700;
+}
+.logo-title { color: #fff; font-size: 14px; font-weight: 600; }
+.logo-sub { color: rgba(255,255,255,0.4); font-size: 11px; margin-left: 4px; }
+.badge {
+  margin-left: auto;
+  background: rgba(29,158,117,0.25);
+  color: rgba(255,255,255,0.7);
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+}
+
+/* ─── Page ─── */
+.page { max-width: 900px; margin: 0 auto; padding: 28px 20px 80px; }
+.page-head { margin-bottom: 24px; }
+.page-head h1 { font-size: 20px; font-weight: 700; color: var(--navy); }
+.page-head p { color: var(--text2); font-size: 12px; margin-top: 3px; }
+
+/* ─── Section Card ─── */
+.sec {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.sec-head {
+  background: var(--surf2);
+  border-bottom: 1px solid var(--border2);
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; user-select: none;
+}
+.sec-icon {
+  width: 26px; height: 26px; border-radius: 6px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #fff;
+}
+.sec-title { font-size: 13px; font-weight: 600; color: var(--navy); }
+.sec-chevron {
+  margin-left: auto; font-size: 12px; color: var(--text3);
+  transition: transform 0.2s;
+}
+.sec-chevron.open { transform: rotate(180deg); }
+.sec-body { padding: 18px; }
+
+/* ─── Form Grid ─── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media(max-width:600px){ .g2,.g3 { grid-template-columns:1fr; } }
+.field { display: flex; flex-direction: column; gap: 5px; }
+label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.04em; }
+label .unit { font-weight: 400; color: var(--text3); }
+
+input[type="text"],
+input[type="number"],
+select {
+  height: 40px; width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(29,158,117,0.15);
+}
+input::placeholder { color: var(--text3); }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2394a8bb'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  padding-right: 30px; cursor: pointer;
+}
+
+/* ─── Inline Alert ─── */
+.alert {
+  display: none;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 10px;
+  border-left: 3px solid;
+}
+.alert.warn { background: var(--warn-bg); border-color: var(--warn-bdr); color: #7a4400; }
+.alert.err  { background: var(--err-bg);  border-color: var(--err-bdr);  color: #9a2020; }
+.alert.show { display: block; }
+
+/* ─── Run Button ─── */
+.divider { border: none; border-top: 1px solid var(--border2); margin: 20px 0; }
+.run-btn {
+  width: 100%; height: 48px;
+  background: var(--teal);
+  color: #fff; border: none;
+  border-radius: 10px;
+  font-size: 15px; font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.05em;
+}
+.run-btn:hover  { background: var(--teal-dk); }
+.run-btn:active { transform: scale(0.98); }
+
+/* ─── Results ─── */
+#result { display: none; margin-top: 24px; }
+.result-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.result-sub { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+.saved-tag { font-size: 11px; color: var(--teal); margin-bottom: 16px; }
+
+/* KPI row */
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
+@media(max-width:600px){ .kpi-row { grid-template-columns: 1fr 1fr; } }
+.kpi {
+  background: var(--surf2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px;
+}
+.kpi-label { font-size: 11px; color: var(--text2); font-weight: 600; letter-spacing: 0.04em; margin-bottom: 6px; }
+.kpi-val { font-size: 22px; font-weight: 700; color: var(--navy); }
+.kpi-unit { font-size: 13px; font-weight: 400; margin-left: 2px; }
+
+/* Route banner */
+.route-banner {
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 15px; font-weight: 700;
+  margin: 12px 0 6px;
+  border-left: 4px solid;
+}
+.route-A { background: var(--green-bg); border-color: var(--green-bdr); color: var(--green); }
+.route-B { background: var(--lime-bg);  border-color: var(--lime-bdr);  color: var(--lime); }
+.route-C { background: var(--red-bg);   border-color: var(--red-bdr);   color: var(--red); }
+.route-comment { font-size: 12px; color: var(--text2); margin-bottom: 16px; }
+
+/* Score breakdown */
+.breakdown-head { font-size: 14px; font-weight: 700; margin-bottom: 14px; color: var(--navy); }
+.breakdown-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media(max-width:600px){ .breakdown-row { grid-template-columns:1fr; } }
+.score-card {
+  background: var(--surf2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px;
+}
+.sc-label { font-size: 11px; color: var(--text2); font-weight: 600; margin-bottom: 6px; }
+.sc-val { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.progress-track {
+  height: 5px; background: var(--border2); border-radius: 3px; overflow: hidden; margin-bottom: 6px;
+}
+.progress-bar {
+  height: 100%; background: var(--teal); border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.sc-detail { font-size: 11px; color: var(--text3); }
+
+/* Flags */
+.flags-head { font-size: 14px; font-weight: 700; margin: 16px 0 10px; color: var(--navy); }
+.flag-item {
+  background: var(--amber-bg);
+  border-left: 3px solid var(--amber-bdr);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 12px; color: var(--amber);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.no-flag {
+  background: var(--green-bg);
+  border: 1px solid var(--green-bdr);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px; color: var(--green);
+  font-weight: 600;
+}
+
+/* Disclaimer */
+.disclaimer {
+  font-size: 11px; color: var(--text3);
+  border-top: 1px solid var(--border2);
+  padding-top: 14px; margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-box">📊</div>
+    <span class="logo-title">資金調達 審査スコアリングシステム</span>
+    <span class="logo-sub"></span>
+    <span class="badge">自動振分エンジン v3 ｜ Nexcess</span>
+  </div>
+</header>
+
+<div class="page">
+  <div class="page-head">
+    <h1>審査入力フォーム</h1>
+    <p>必要項目を入力し「審査を実行する」をクリックしてください。</p>
+  </div>
+
+  <!-- ── 案件基本情報 ── -->
+  <div class="sec">
+    <div class="sec-head" onclick="toggleSec(this)">
+      <div class="sec-icon">📁</div>
+      <span class="sec-title">案件基本情報</span>
+      <span class="sec-chevron open">▼</span>
+    </div>
+    <div class="sec-body">
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>会社名</label>
+          <input type="text" id="company" placeholder="例：テスト株式会社">
+        </div>
+        <div class="field">
+          <label>業種</label>
+          <select id="industry">
+            <option>製造業</option><option>不動産業</option><option>建設業</option>
+            <option>卸売業</option><option>小売業</option><option>サービス業</option>
+            <option>飲食業</option><option>IT・通信</option><option>医療・福祉</option><option>その他</option>
+          </select>
+        </div>
+      </div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>設立年数 <span class="unit">（年）</span></label>
+          <input type="number" id="years" value="5" min="0">
+        </div>
+        <div class="field">
+          <label>資金使途</label>
+          <select id="purpose" onchange="checkPurpose()">
+            <option>増加運転資金</option><option>設備投資</option>
+            <option>納税</option><option>赤字補填</option><option>その他</option>
+          </select>
+        </div>
+      </div>
+      <div id="purposeAlert" class="alert warn">▲ 要注意資金使途です。追加ヒアリングを推奨します。</div>
+      <div class="g2">
+        <div class="field">
+          <label>希望調達額 <span class="unit">（円）</span></label>
+          <input type="number" id="amount" value="5000000" step="100000" min="0">
+        </div>
+        <div class="field">
+          <label>希望返済期間 <span class="unit">（月）</span></label>
+          <input type="number" id="repayment" value="36" min="1">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 業績情報 ── -->
+  <div class="sec">
+    <div class="sec-head" onclick="toggleSec(this)">
+      <div class="sec-icon">📈</div>
+      <span class="sec-title">業績情報</span>
+      <span class="sec-chevron open">▼</span>
+    </div>
+    <div class="sec-body">
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>年商・前期実績 <span class="unit">（円）</span></label>
+          <input type="number" id="sales_prev" value="100000000" step="1000000" min="0" oninput="checkSalesDivergence()">
+        </div>
+        <div class="field">
+          <label>年商・今期予測 <span class="unit">（円）</span></label>
+          <input type="number" id="sales_curr" value="100000000" step="1000000" min="0" oninput="checkSalesDivergence()">
+        </div>
+      </div>
+      <div id="salesAlert" class="alert warn"></div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>営業利益・前期実績 <span class="unit">（円）</span></label>
+          <input type="number" id="op_prev" value="5000000" step="100000">
+        </div>
+        <div class="field">
+          <label>営業利益・今期予測 <span class="unit">（円）</span></label>
+          <input type="number" id="op_curr" value="5000000" step="100000">
+        </div>
+      </div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>減価償却費 <span class="unit">（円）</span></label>
+          <input type="number" id="dep" value="0" step="100000" min="0">
+        </div>
+        <div class="field">
+          <label>現預金残高 <span class="unit">（円）</span></label>
+          <input type="number" id="cash" value="3000000" step="100000" min="0">
+        </div>
+      </div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>借入総額・有利子負債 <span class="unit">（円）</span></label>
+          <input type="number" id="debt" value="30000000" step="1000000" min="0">
+        </div>
+        <div class="field">
+          <label>純資産・自己資本 <span class="unit">（円）</span></label>
+          <input type="number" id="equity" value="20000000" step="1000000">
+        </div>
+      </div>
+      <div class="g2">
+        <div class="field">
+          <label>役員借入金 <span class="unit">（円）</span></label>
+          <input type="number" id="exec_loan" value="0" step="100000" min="0">
+        </div>
+        <div class="field">
+          <label>役員貸付金 <span class="unit">（円）</span></label>
+          <input type="number" id="exec_lending" value="0" step="100000" min="0">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 保全・属性 ── -->
+  <div class="sec">
+    <div class="sec-head" onclick="toggleSec(this)">
+      <div class="sec-icon">🏦</div>
+      <span class="sec-title">保全・属性</span>
+      <span class="sec-chevron open">▼</span>
+    </div>
+    <div class="sec-body">
+      <div class="g2" style="margin-bottom:14px">
+        <div class="field">
+          <label>不動産担保</label>
+          <select id="real_estate"><option value="0">無</option><option value="1">有</option></select>
+        </div>
+        <div class="field">
+          <label>証券担保</label>
+          <select id="securities"><option value="0">無</option><option value="1">有</option></select>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="field">
+          <label>売掛先属性</label>
+          <select id="receivable">
+            <option value="A">A（上場・官公庁）</option>
+            <option value="B">B（準優良）</option>
+            <option value="C">C（一般）</option>
+            <option value="D">D（不明・懸念）</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>税金滞納</label>
+          <select id="tax_delinquent" onchange="checkTax()">
+            <option value="0">無</option><option value="1">有</option>
+          </select>
+        </div>
+      </div>
+      <div id="taxAlert" class="alert err">▲ 税金滞納あり：融資ルートが強制遮断されます。</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <button class="run-btn" onclick="runScore()">　審査を実行する　</button>
+
+  <!-- ── 審査結果 ── -->
+  <div id="result">
+    <hr class="divider">
+    <div class="result-title">審査結果</div>
+    <div class="result-sub" id="res-company"></div>
+    <div class="saved-tag">✓ スコアリング完了</div>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">総合スコア</div><div class="kpi-val" id="kpi-total">—<span class="kpi-unit">点</span></div></div>
+      <div class="kpi"><div class="kpi-label">総合ランク</div><div class="kpi-val" id="kpi-rank" style="font-size:15px">—</div></div>
+      <div class="kpi"><div class="kpi-label">自己資本比率</div><div class="kpi-val" id="kpi-eq">—<span class="kpi-unit">%</span></div></div>
+      <div class="kpi"><div class="kpi-label">債務償還年数</div><div class="kpi-val" id="kpi-debt">—<span class="kpi-unit">年</span></div></div>
+    </div>
+
+    <div id="res-route-banner" class="route-banner"></div>
+    <div id="res-comment" class="route-comment"></div>
+
+    <div class="sec" style="margin-bottom:16px">
+      <div class="sec-head" onclick="toggleSec(this)">
+        <div class="sec-icon">📊</div>
+        <span class="sec-title">スコア内訳</span>
+        <span class="sec-chevron open">▼</span>
+      </div>
+      <div class="sec-body">
+        <div class="breakdown-row">
+          <div class="score-card">
+            <div class="sc-label">安全性（40点満点）</div>
+            <div class="sc-val" id="sc-safety">—</div>
+            <div class="progress-track"><div class="progress-bar" id="bar-safety" style="width:0%"></div></div>
+            <div class="sc-detail" id="sc-safety-detail"></div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">返済能力（40点満点）</div>
+            <div class="sc-val" id="sc-debt">—</div>
+            <div class="progress-track"><div class="progress-bar" id="bar-debt" style="width:0%"></div></div>
+            <div class="sc-detail" id="sc-debt-detail"></div>
+          </div>
+          <div class="score-card">
+            <div class="sc-label">収益性（20点満点）</div>
+            <div class="sc-val" id="sc-profit">—</div>
+            <div class="progress-track"><div class="progress-bar" id="bar-profit" style="width:0%"></div></div>
+            <div class="sc-detail" id="sc-profit-detail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flags-head">警告フラグ</div>
+    <div id="res-flags"></div>
+
+    <div class="disclaimer">
+      ※ 本ツールの判定は一次スクリーニング用途です。最終判断は担当者の責任において行ってください。
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── UI Helpers ───
+function toggleSec(head) {
+  const body = head.nextElementSibling;
+  const chev = head.querySelector('.sec-chevron');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : '';
+  chev.classList.toggle('open', !open);
+}
+
+function checkPurpose() {
+  const v = document.getElementById('purpose').value;
+  const el = document.getElementById('purposeAlert');
+  el.classList.toggle('show', v === '納税' || v === '赤字補填');
+}
+
+function checkTax() {
+  const v = document.getElementById('tax_delinquent').value;
+  document.getElementById('taxAlert').classList.toggle('show', v === '1');
+}
+
+function checkSalesDivergence() {
+  const sp = parseFloat(document.getElementById('sales_prev').value) || 0;
+  const sc = parseFloat(document.getElementById('sales_curr').value) || 0;
+  const el = document.getElementById('salesAlert');
+  if (sp > 0 && Math.abs(sc - sp) / sp > 0.30) {
+    const pct = (Math.abs(sc - sp) / sp * 100).toFixed(0);
+    el.textContent = `▲ 前期との乖離 ${pct}% — エビデンス確認推奨`;
+    el.classList.add('show');
+  } else {
+    el.classList.remove('show');
+  }
+}
+
+function n(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function s(id) { return document.getElementById(id).value; }
+
+// ─── Scoring Logic（app.py 完全移植）───
+function calcScore(d) {
+  const sp   = Math.max(d.sales_prev, 1);
+  const op   = d.op_prev;
+  const dep  = d.dep;
+  const debt = d.debt;
+  const eq   = d.equity;
+  const exl  = d.exec_loan;
+  const exld = d.exec_lending;
+
+  const real_eq  = eq + exl - exld;
+  const eq_ratio = (real_eq + debt) > 0 ? real_eq / (real_eq + debt) : 0;
+  const op_rate  = op / sp;
+  const ebitda   = op + dep;
+  const debt_years = ebitda > 0 ? debt / ebitda : 99.0;
+
+  const s_safety = eq_ratio >= 0.20 ? 40.0
+                 : eq_ratio <= 0    ? 0.0
+                 : (eq_ratio / 0.20) * 40;
+  const s_debt   = debt_years <= 5  ? 40.0
+                 : debt_years >= 15 ? 0.0
+                 : ((15 - debt_years) / 10) * 40;
+  const s_profit = op_rate >= 0.05 ? 20.0
+                 : op_rate <= 0    ? 0.0
+                 : (op_rate / 0.05) * 20;
+  const total = s_safety + s_debt + s_profit;
+
+  const tax    = d.tax_delinquent;
+  const recv   = d.receivable;
+  const hasRE  = d.real_estate;
+
+  let rank, route, comment;
+  if (total >= 80 && !tax) {
+    rank    = 'A/B（High）';
+    route   = 'A';
+    comment = '優良案件。自社融資の検討を推奨します。';
+  } else if (total >= 40) {
+    rank = 'C/D（Middle）';
+    if (tax) {
+      route   = 'B';
+      comment = '【注意】税金滞納あり：融資ルート遮断。ファクタリング検討可。';
+    } else if (recv === 'A' || recv === 'B') {
+      route   = 'B';
+      comment = '売掛先優良。ファクタリングへ格上げ。';
+    } else {
+      route   = 'B';
+      comment = 'Middle層。ファクタリングが適切です。';
+    }
+  } else {
+    rank = 'E（Low）';
+    if (hasRE && !tax) {
+      route   = 'B';
+      comment = '不動産担保あり：ルートC→B格上げ（担保設定条件付き）。';
+    } else {
+      route   = 'C';
+      comment = 'スコア低位。外部ノンバンクへの送客を推奨します。';
+    }
+  }
+  // 税金滞納 × 高スコア 上書き
+  if (tax && total >= 80) {
+    route   = 'B';
+    rank    = 'C/D（Middle）';
+    comment = '【注意】税金滞納あり：高スコアだが融資ルート遮断。ファクタリング検討可。';
+  }
+
+  // フラグ
+  const flags = [];
+  const sc2 = d.sales_curr;
+  const div = sp > 0 ? Math.abs(sc2 - sp) / sp : 0;
+  if (div > 0.30) flags.push(`業績乖離（${(div*100).toFixed(0)}%）：エビデンス確認推奨`);
+  if (debt_years * 12 < d.repayment) flags.push(`返済期間（${d.repayment}ヶ月）が長すぎます（リスケリスク）`);
+  if (d.purpose === '納税' || d.purpose === '赤字補填') flags.push(`資金使途に要注意（${d.purpose}）`);
+  if (tax) flags.push('税金滞納あり：融資ルート強制遮断');
+
+  return { total, s_safety, s_debt, s_profit, rank, route, comment, flags, eq_ratio, debt_years, op_rate };
+}
+
+// ─── Run & Render ───
+function runScore() {
+  const d = {
+    company:        s('company'),
+    industry:       s('industry'),
+    years:          n('years'),
+    purpose:        s('purpose'),
+    amount:         n('amount'),
+    repayment:      n('repayment'),
+    sales_prev:     n('sales_prev'),
+    sales_curr:     n('sales_curr'),
+    op_prev:        n('op_prev'),
+    op_curr:        n('op_curr'),
+    dep:            n('dep'),
+    cash:           n('cash'),
+    debt:           n('debt'),
+    equity:         n('equity'),
+    exec_loan:      n('exec_loan'),
+    exec_lending:   n('exec_lending'),
+    real_estate:    s('real_estate') === '1',
+    securities:     s('securities') === '1',
+    receivable:     s('receivable'),
+    tax_delinquent: s('tax_delinquent') === '1'
+  };
+
+  const r = calcScore(d);
+
+  // 会社名
+  document.getElementById('res-company').textContent =
+    (d.company || '（会社名未入力）') + ' ／ ' + d.industry;
+
+  // KPI
+  document.getElementById('kpi-total').innerHTML = r.total.toFixed(1) + '<span class="kpi-unit">点</span>';
+  document.getElementById('kpi-rank').textContent  = r.rank;
+  document.getElementById('kpi-eq').innerHTML  = (r.eq_ratio * 100).toFixed(1) + '<span class="kpi-unit">%</span>';
+  const dy = r.debt_years < 99 ? r.debt_years.toFixed(1) : '99超';
+  document.getElementById('kpi-debt').innerHTML = dy + '<span class="kpi-unit">年</span>';
+
+  // Route banner
+  const routeNames = { A: 'ルートA：自社融資', B: 'ルートB：自社ファクタリング', C: 'ルートC：外部ノンバンク送客' };
+  const banner = document.getElementById('res-route-banner');
+  banner.className = 'route-banner route-' + r.route;
+  banner.textContent = routeNames[r.route];
+  document.getElementById('res-comment').textContent = r.comment;
+
+  // Score breakdown
+  document.getElementById('sc-safety').textContent = r.s_safety.toFixed(1);
+  document.getElementById('bar-safety').style.width = (r.s_safety / 40 * 100).toFixed(1) + '%';
+  document.getElementById('sc-safety-detail').textContent = `自己資本比率 ${(r.eq_ratio*100).toFixed(1)}%`;
+
+  document.getElementById('sc-debt').textContent = r.s_debt.toFixed(1);
+  document.getElementById('bar-debt').style.width = (r.s_debt / 40 * 100).toFixed(1) + '%';
+  document.getElementById('sc-debt-detail').textContent = `債務償還年数 ${Math.min(r.debt_years, 99).toFixed(1)}年`;
+
+  document.getElementById('sc-profit').textContent = r.s_profit.toFixed(1);
+  document.getElementById('bar-profit').style.width = (r.s_profit / 20 * 100).toFixed(1) + '%';
+  document.getElementById('sc-profit-detail').textContent = `営業利益率 ${(r.op_rate*100).toFixed(2)}%`;
+
+  // Flags
+  const flagsDiv = document.getElementById('res-flags');
+  if (r.flags.length > 0) {
+    flagsDiv.innerHTML = r.flags.map(f => `<div class="flag-item">▲ ${f}</div>`).join('');
+  } else {
+    flagsDiv.innerHTML = '<div class="no-flag">✓ 警告フラグなし</div>';
+  }
+
+  // Show result & scroll
+  const el = document.getElementById('result');
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
