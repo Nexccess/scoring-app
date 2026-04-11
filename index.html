@@ -338,9 +338,7 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
       <div class="g2" style="margin-top:14px">
         <div class="field">
           <label>希望調達額 <span class="unit">（円）</span></label>
-          <input type="number" id="amount" value="5000000" step="100000" min="0"
-            oninput="fmtHint('amount','amountHint')" onfocus="clearFmt('amountHint')" onblur="showFmt('amount','amountHint')">
-          <span class="fmt-hint" id="amountHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="amount" class="num-input" value="5,000,000" autocomplete="off">
         </div>
         <div class="field">
           <label>希望返済期間 <span class="unit">（月）</span></label>
@@ -360,72 +358,52 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
       <div class="g2 mb">
         <div class="field">
           <label>年商・前期実績 <span class="unit">（円）</span></label>
-          <input type="number" id="sales_prev" value="100000000" step="1000000" min="0"
-            oninput="checkDiv();fmtHint('sales_prev','spHint')" onfocus="clearFmt('spHint')" onblur="showFmt('sales_prev','spHint')">
-          <span class="fmt-hint" id="spHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="sales_prev" class="num-input" oninput="checkDiv()" value="100,000,000" autocomplete="off">
         </div>
         <div class="field">
           <label>年商・今期予測 <span class="unit">（円）</span></label>
-          <input type="number" id="sales_curr" value="100000000" step="1000000" min="0"
-            oninput="checkDiv();fmtHint('sales_curr','scHint')" onfocus="clearFmt('scHint')" onblur="showFmt('sales_curr','scHint')">
-          <span class="fmt-hint" id="scHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="sales_curr" class="num-input" oninput="checkDiv()" value="100,000,000" autocomplete="off">
         </div>
       </div>
       <div id="salesAlert" class="alert warn"></div>
       <div class="g2 mb" style="margin-top:14px">
         <div class="field">
           <label>営業利益・前期実績 <span class="unit">（円）</span></label>
-          <input type="number" id="op_prev" value="5000000" step="100000"
-            oninput="fmtHint('op_prev','opHint')" onfocus="clearFmt('opHint')" onblur="showFmt('op_prev','opHint')">
-          <span class="fmt-hint" id="opHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="op_prev" class="num-input" value="5,000,000" autocomplete="off">
         </div>
         <div class="field">
           <label>営業利益・今期予測 <span class="unit">（円）</span></label>
-          <input type="number" id="op_curr" value="5000000" step="100000"
-            oninput="fmtHint('op_curr','ocHint')" onfocus="clearFmt('ocHint')" onblur="showFmt('op_curr','ocHint')">
-          <span class="fmt-hint" id="ocHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="op_curr" class="num-input" value="5,000,000" autocomplete="off">
         </div>
       </div>
       <div class="g2 mb">
         <div class="field">
           <label>減価償却費 <span class="unit">（円）</span></label>
-          <input type="number" id="dep" value="0" step="100000" min="0"
-            oninput="fmtHint('dep','depHint')" onfocus="clearFmt('depHint')" onblur="showFmt('dep','depHint')">
-          <span class="fmt-hint" id="depHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="dep" class="num-input" value="0" autocomplete="off">
         </div>
         <div class="field">
           <label>現預金残高 <span class="unit">（円）</span></label>
-          <input type="number" id="cash" value="3000000" step="100000" min="0"
-            oninput="fmtHint('cash','cashHint')" onfocus="clearFmt('cashHint')" onblur="showFmt('cash','cashHint')">
-          <span class="fmt-hint" id="cashHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="cash" class="num-input" value="3,000,000" autocomplete="off">
         </div>
       </div>
       <div class="g2 mb">
         <div class="field">
           <label>借入総額・有利子負債 <span class="unit">（円）</span></label>
-          <input type="number" id="debt" value="30000000" step="1000000" min="0"
-            oninput="fmtHint('debt','debtHint')" onfocus="clearFmt('debtHint')" onblur="showFmt('debt','debtHint')">
-          <span class="fmt-hint" id="debtHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="debt" class="num-input" value="30,000,000" autocomplete="off">
         </div>
         <div class="field">
           <label>純資産・自己資本 <span class="unit">（円）</span></label>
-          <input type="number" id="equity" value="20000000" step="1000000"
-            oninput="fmtHint('equity','eqHint')" onfocus="clearFmt('eqHint')" onblur="showFmt('equity','eqHint')">
-          <span class="fmt-hint" id="eqHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="equity" class="num-input" value="20,000,000" autocomplete="off">
         </div>
       </div>
       <div class="g2">
         <div class="field">
           <label>役員借入金 <span class="unit">（円）</span></label>
-          <input type="number" id="exec_loan" value="0" step="100000" min="0"
-            oninput="fmtHint('exec_loan','elHint')" onfocus="clearFmt('elHint')" onblur="showFmt('exec_loan','elHint')">
-          <span class="fmt-hint" id="elHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="exec_loan" class="num-input" value="0" autocomplete="off">
         </div>
         <div class="field">
           <label>役員貸付金 <span class="unit">（円）</span></label>
-          <input type="number" id="exec_lending" value="0" step="100000" min="0"
-            oninput="fmtHint('exec_lending','eldHint')" onfocus="clearFmt('eldHint')" onblur="showFmt('exec_lending','eldHint')">
-          <span class="fmt-hint" id="eldHint" style="font-size:11px;color:var(--text3)"></span>
+          <input type="text" inputmode="numeric" id="exec_lending" class="num-input" value="0" autocomplete="off">
         </div>
       </div>
     </div>
@@ -600,20 +578,6 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 </div><!-- /page -->
 
 <script>
-// ─── Comma format helpers ───
-function fmt(v){
-  const n=parseFloat(v);
-  if(isNaN(n))return '';
-  return Math.abs(n)>=1000?n.toLocaleString('ja-JP')+'円':n.toLocaleString('ja-JP')+'円';
-}
-function fmtHint(inputId,hintId){
-  const v=parseFloat(document.getElementById(inputId).value);
-  const h=document.getElementById(hintId);
-  if(!isNaN(v)&&Math.abs(v)>=1000)h.textContent='= '+v.toLocaleString('ja-JP')+' 円';
-  else h.textContent='';
-}
-function showFmt(inputId,hintId){fmtHint(inputId,hintId);}
-function clearFmt(hintId){/* keep hint visible */}
 
 // ─── Step UI ───
 function setStep(n){
@@ -652,8 +616,8 @@ function checkTax(){
   document.getElementById('taxAlert').classList.toggle('show',v==='1');
 }
 function checkDiv(){
-  const sp=parseFloat(document.getElementById('sales_prev').value)||0;
-  const sc=parseFloat(document.getElementById('sales_curr').value)||0;
+  const sp=nv('sales_prev');
+  const sc=nv('sales_curr');
   const el=document.getElementById('salesAlert');
   if(sp>0&&Math.abs(sc-sp)/sp>0.30){
     const pct=(Math.abs(sc-sp)/sp*100).toFixed(0);
@@ -663,7 +627,7 @@ function checkDiv(){
 }
 
 // ─── Input helpers ───
-function nv(id){return parseFloat(document.getElementById(id).value)||0;}
+function nv(id){var v=document.getElementById(id).value.replace(/,/g,'');return parseFloat(v)||0;}
 function sv(id){return document.getElementById(id).value;}
 
 // ─── Scoring Logic（app.py完全移植） ───
@@ -952,11 +916,8 @@ function importCSV(input){
       setS('tax_delinquent',vals[19]==='有'?'1':'0');
 
       // フォーマットヒント更新
-      ['amount','sales_prev','sales_curr','op_prev','op_curr','dep','cash','debt','equity','exec_loan','exec_lending'].forEach(id=>{
-        const pairs={'amount':'amountHint','sales_prev':'spHint','sales_curr':'scHint',
-          'op_prev':'opHint','op_curr':'ocHint','dep':'depHint','cash':'cashHint',
-          'debt':'debtHint','equity':'eqHint','exec_loan':'elHint','exec_lending':'eldHint'};
-        fmtHint(id,pairs[id]);
+      ['amount','sales_prev','sales_curr','op_prev','op_curr','dep','cash','debt','equity','exec_loan','exec_lending'].forEach(function(id){
+        var el=document.getElementById(id);if(el)numFmt(el);
       });
       checkDiv();checkPurpose();checkTax();
 
@@ -995,12 +956,31 @@ function exportCSV(){
   dlCSV(headers.join(',')+'\n'+row.join(','),'nexcess_result_'+Date.now()+'.csv');
 }
 
-// ─── Init hints ───
-window.addEventListener('DOMContentLoaded',()=>{
-  [['amount','amountHint'],['sales_prev','spHint'],['sales_curr','scHint'],
-   ['op_prev','opHint'],['op_curr','ocHint'],['dep','depHint'],['cash','cashHint'],
-   ['debt','debtHint'],['equity','eqHint'],['exec_loan','elHint'],['exec_lending','eldHint']
-  ].forEach(([id,hint])=>fmtHint(id,hint));
+
+// ─── Comma input formatter ───
+function numFmt(el) {
+  var raw = el.value.replace(/[^0-9\-]/g, '');
+  if (raw === '' || raw === '-') return;
+  var neg = raw.startsWith('-');
+  var digits = raw.replace('-', '');
+  var num = parseInt(digits, 10);
+  el.value = (neg ? '-' : '') + (isNaN(num) ? '' : num.toLocaleString('ja-JP'));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.num-input').forEach(function(el) {
+    // Format initial value
+    numFmt(el);
+    // Format on input
+    el.addEventListener('input', function() {
+      var start = el.selectionStart;
+      var oldLen = el.value.length;
+      numFmt(el);
+      var newLen = el.value.length;
+      el.setSelectionRange(start + (newLen - oldLen), start + (newLen - oldLen));
+    });
+    // Strip commas on focus (keep raw for easier editing? No - keep commas)
+  });
 });
 </script>
 </body>
