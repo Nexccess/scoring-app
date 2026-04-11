@@ -860,7 +860,6 @@ function saveToSheet(d,r){
   fetch(GAS_URL,{
     method:'POST',
     mode:'no-cors',
-    headers:{'Content-Type':'application/json'},
     body:JSON.stringify({row:row})
   }).catch(()=>{/* 保存失敗はサイレント処理 */});
 }
