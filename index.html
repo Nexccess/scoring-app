@@ -794,6 +794,9 @@ function runScore(){
   // Print summary
   buildPrintSummary(d);
 
+  // Google Sheets保存
+  saveToSheet(d,r);
+
   showPhase('phaseResult');
   setStep(3);
   document.getElementById('stepBar').style.display='none';
@@ -819,6 +822,47 @@ function buildPrintSummary(d){
     ['売掛先属性',d.receivable],['税金滞納',d.tax_delinquent?'有':'無']
   ];
   document.getElementById('printInputBody').innerHTML=rows.map(r=>'<div style="display:flex;gap:16px;border-bottom:1px solid #eee;padding:3px 0"><span style="min-width:140px;color:#666;font-weight:600">'+r[0]+'</span><span>'+r[1]+'</span></div>').join('');
+}
+
+// ─── Google Sheets保存（GAS経由） ───
+const GAS_URL='https://script.google.com/macros/s/AKfycbyu8gkV8dnvOa8gXQ6_rq7XNYxY82cPgxV6ZOVVBUxLJFNyKfrOTL2Wj6SMxRv2pOLO/exec';
+
+function saveToSheet(d,r){
+  const now=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
+  const row=[
+    now,
+    d.company,
+    d.industry,
+    d.amount,
+    d.repayment,
+    d.purpose,
+    d.tax_delinquent?'有':'無',
+    d.sales_prev,
+    d.sales_curr,
+    d.op_prev,
+    d.dep,
+    d.cash,
+    d.debt,
+    d.equity,
+    d.exec_loan,
+    d.exec_lending,
+    d.real_estate?'有':'無',
+    d.securities?'有':'無',
+    d.receivable,
+    parseFloat(r.total.toFixed(1)),
+    r.rank,
+    r.route,
+    parseFloat((r.eq_ratio*100).toFixed(1)),
+    parseFloat(Math.min(r.debt_years,99).toFixed(1)),
+    parseFloat((r.op_rate*100).toFixed(2)),
+    r.flags.length>0?r.flags.join(' / '):'なし'
+  ];
+  fetch(GAS_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({row:row})
+  }).catch(()=>{/* 保存失敗はサイレント処理 */});
 }
 
 // ─── PDF ───
