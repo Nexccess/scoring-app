@@ -973,7 +973,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         const d = typeof getInputs === 'function' ? getInputs() : null;
         const r = (typeof runScoring === 'function' && d) ? runScoring(d) : null;
         // 先程のURLをそのまま使用
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbwgYtytDXbO2wERCBG5M0AC1yq38LAd-d6hAxV7jmA-ichB2LbVJcuKx2aqMHXON-HJ/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwcPT81MXsNyFLpN0tmTZcv9IldpvcqLPEO6SDAXdESVn-jpLrg9xyCDjVpsS4R1CUx/exec";
 
         if (d && r) {
           const payload = JSON.stringify({
