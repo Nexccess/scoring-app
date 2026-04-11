@@ -962,3 +962,46 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
+
+<script>
+/**
+ * 既存の処理を一切書き換えずに、送信機能だけを後付けする処理
+ */
+(function() {
+  // 元々のcalc関数をバックアップ
+  const originalCalc = typeof calc === 'function' ? calc : null;
+
+  if (originalCalc) {
+    // calc関数を「既存処理 + GAS送信」という形で上書き定義（既存の中身は触りません）
+    window.calc = function() {
+      // 1. まず元の計算処理を実行
+      originalCalc();
+
+      // 2. その後にGASへの送信を試みる（エラーが起きても既存処理には影響させない）
+      try {
+        const d = typeof getInputs === 'function' ? getInputs() : null;
+        const r = (typeof runScoring === 'function' && d) ? runScoring(d) : null;
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbxIh2Zl5cyyudRwZ1kyM2ok_jqg1XI-4AfpnCOO-k7Vj1eBYCxy_Jk_aVMCKbE1JW3R/exec";
+
+        if (d && r) {
+          const payload = {
+            ...d,
+            score: r.score, rank: r.rank, route: r.route,
+            equity_ratio: r.equityRatio, debt_repayment: r.debtRepayment,
+            op_margin: r.opMargin, warnings: r.warnings
+          };
+
+          fetch(GAS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          }).catch(e => console.error("Sync Error:", e));
+        }
+      } catch (e) {
+        console.error("GAS transmission failed but core logic is safe.", e);
+      }
+    };
+  }
+})();
+</script>
