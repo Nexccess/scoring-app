@@ -966,33 +966,29 @@ window.addEventListener('DOMContentLoaded',()=>{
 <script>
 (function() {
   const originalCalc = typeof calc === 'function' ? calc : null;
-  if (originalCalc) {
-    window.calc = function() {
-      originalCalc(); // 既存の表示処理を実行
-      try {
-        const d = typeof getInputs === 'function' ? getInputs() : null;
-        const r = (typeof runScoring === 'function' && d) ? runScoring(d) : null;
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbwgYtytDXbO2wERCBG5M0AC1yq38LAd-d6hAxV7jmA-ichB2LbVJcuKx2aqMHXON-HJ/exec";
+  if (!originalCalc) return;
 
-        if (d && r) {
-          const payload = {
-            ...d,
-            score: r.score, rank: r.rank, route: r.route,
-            equity_ratio: r.equityRatio, debt_repayment: r.debtRepayment,
-            op_margin: r.opMargin, warnings: r.warnings
-          };
+  window.calc = function() {
+    originalCalc(); // 既存の表示処理
+    
+    try {
+      const d = typeof getInputs === 'function' ? getInputs() : null;
+      const r = (typeof runScoring === 'function' && d) ? runScoring(d) : null;
+      const URL = "https://script.google.com/macros/s/AKfycbwgYtytDXbO2wERCBG5M0AC1yq38LAd-d6hAxV7jmA-ichB2LbVJcuKx2aqMHXON-HJ/exec";
 
-          // 制限を回避するため、あえてContent-Typeを指定せずに送信
-          fetch(GAS_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(payload)
-          }).catch(e => console.error("Send Error:", e));
-        }
-      } catch (e) {
-        console.error("Transmission Error:", e);
+      if (d && r) {
+        const payload = JSON.stringify({
+          ...d,
+          score: r.score, rank: r.rank, route: r.route,
+          equity_ratio: r.equityRatio, debt_repayment: r.debtRepayment,
+          op_margin: r.opMargin, warnings: r.warnings
+        });
+
+        // CORS制限を回避してデータを送信する最も確実な方法
+        const blob = new Blob([payload], { type: 'text/plain' });
+        navigator.sendBeacon(URL, blob);
       }
-    };
-  }
+    } catch (e) {}
+  };
 })();
 </script>
