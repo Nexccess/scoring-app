@@ -12,45 +12,59 @@
    Variables & Reset
 ═══════════════════════════════════════ */
 :root {
-  --c1:      #192f60;
-  --c2:      #1a4a6b;
-  --c3:      #2f3e64;
-  --gold:    #c8a45a;
-  --gold-lt: #e8d49a;
-  --gold-bg: rgba(200,164,90,0.09);
-  --gold-bdr:rgba(200,164,90,0.45);
-  --c1a:     rgba(25,47,96,0.06);
-  --c2a:     rgba(26,74,107,0.10);
-  --bg:      #f4f6fb;
-  --surf:    #ffffff;
-  --surf2:   #f8fafd;
-  --border:  #dce3ee;
-  --border2: #eaeff8;
-  --text:    #1c2e4a;
-  --text2:   #3d5470;
-  --text3:   #6b82a0;
-  --green:   #0a5c47; --green-bg: #e6f5f0; --green-bdr: #1D9E75;
-  --lime:    #2d5a10; --lime-bg:  #edf5e2; --lime-bdr:  #5a9020;
-  --amber:   #5a3800; --amber-bg: #fdf3e0; --amber-bdr: #c8a45a;
-  --warn:    #5a3800; --warn-bg:  #fdf3e0; --warn-bdr:  #c8a45a;
-  --err:     #5a3800; --err-bg:   #fdf3e0; --err-bdr:   #c8a45a;
-  --shadow:  0 2px 20px rgba(25,47,96,0.07);
-  --shadow2: 0 4px 28px rgba(25,47,96,0.11);
+  --c1:       #2C3E50;
+  --c2:       #4A5568;
+  --c3:       #374151;
+  --accent:   rgba(44, 62, 80, 0.85);
+  --accent-lt:rgba(44, 62, 80, 0.50);
+  --accent-bg:rgba(44, 62, 80, 0.06);
+  --accent-bdr:rgba(44, 62, 80, 0.25);
+  --c1a:      rgba(44, 62, 80, 0.06);
+  --c2a:      rgba(74, 85, 104, 0.10);
+  --bg:       #F8F9FA;
+  --surf:     #ffffff;
+  --surf2:    #F8F9FA;
+  --border:   #CED4DA;
+  --border2:  #DEE2E6;
+  --text:     #333333;
+  --text2:    #495057;
+  --text3:    #868E96;
+  --green:    #1a6b4a; --green-bg:  #e8f5f0; --green-bdr:  #28a97c;
+  --lime:     #3a6b1a; --lime-bg:   #edf5e2; --lime-bdr:   #5a9020;
+  --amber:    #6b4a00; --amber-bg:  #fdf5e0; --amber-bdr:  #b8860b;
+  --warn:     #6b4a00; --warn-bg:   #fdf5e0; --warn-bdr:   #b8860b;
+  --err:      #8B0000; --err-bg:    #fdf0f0; --err-bdr:    #c0392b;
+  --shadow:   0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow2:  0 2px 6px rgba(0,0,0,0.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
-  background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;min-height:100vh}
+body{
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;min-height:100vh
+}
 
 /* ═══════════════════════════════════════
    Header
 ═══════════════════════════════════════ */
-header{background:var(--c1);position:sticky;top:0;z-index:300;box-shadow:0 2px 20px rgba(25,47,96,0.3);border-bottom:1px solid var(--gold-bdr)}
+header{
+  background:var(--accent);
+  position:sticky;top:0;z-index:300;
+  box-shadow:0 1px 8px rgba(0,0,0,0.18);
+  border-bottom:1px solid rgba(44,62,80,0.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px)
+}
 .hdr{max-width:840px;margin:0 auto;height:56px;padding:0 24px;display:flex;align-items:center;gap:14px}
 .hdr-logo{height:36px;width:auto}
-.hdr-div{width:1px;height:24px;background:rgba(255,255,255,0.2)}
-.hdr-title{color:rgba(255,255,255,0.9);font-size:14px;font-weight:400;letter-spacing:0.08em;font-family:'Cormorant Garamond',serif}
-.hdr-badge{margin-left:auto;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);
-  font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.15)}
+.hdr-div{width:1px;height:24px;background:rgba(255,255,255,0.25)}
+.hdr-title{
+  color:rgba(255,255,255,0.90);font-size:14px;font-weight:400;letter-spacing:0.08em;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif
+}
+.hdr-badge{
+  margin-left:auto;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);
+  font-size:11px;padding:3px 10px;border-radius:3px;border:1px solid rgba(255,255,255,0.18)
+}
 
 /* ═══════════════════════════════════════
    Step Progress Bar
@@ -59,17 +73,18 @@ header{background:var(--c1);position:sticky;top:0;z-index:300;box-shadow:0 2px 2
 .step-inner{max-width:840px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:0}
 .step-item{display:flex;align-items:center;gap:8px;flex:1}
 .step-item:last-child{flex:0}
-.step-circle{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);
+.step-circle{
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--border);
   background:var(--surf2);display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:500;color:var(--text3);flex-shrink:0;transition:all .3s}
-.step-circle.done{background:var(--gold);border-color:var(--gold);color:#fff}
-.step-circle.active{background:var(--c1);border-color:var(--c1);color:#fff;
-  box-shadow:0 0 0 3px var(--gold-bg)}
+  font-size:12px;font-weight:500;color:var(--text3);flex-shrink:0;transition:all .3s
+}
+.step-circle.done{background:var(--c2);border-color:var(--c2);color:#fff}
+.step-circle.active{background:var(--c1);border-color:var(--c1);color:#fff;box-shadow:0 0 0 3px var(--accent-bg)}
 .step-label{font-size:11px;font-weight:500;color:var(--text3);transition:color .3s;white-space:nowrap}
 .step-label.active{color:var(--c1)}
-.step-label.done{color:var(--gold)}
+.step-label.done{color:var(--c2)}
 .step-line{flex:1;height:1px;background:var(--border2);margin:0 10px}
-.step-line.done{background:var(--gold-bdr)}
+.step-line.done{background:var(--c2)}
 
 /* ═══════════════════════════════════════
    Page
@@ -79,13 +94,22 @@ header{background:var(--c1);position:sticky;top:0;z-index:300;box-shadow:0 2px 2
 /* ═══════════════════════════════════════
    Section Card
 ═══════════════════════════════════════ */
-.sec{background:var(--surf);border:1px solid var(--border2);border-radius:12px;
-  margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
-.sec-head{background:var(--surf2);border-bottom:1px solid var(--border2);
-  padding:13px 18px;display:flex;align-items:center;gap:10px;border-left:3px solid var(--gold-bdr)}
-.sec-icon{width:26px;height:26px;border-radius:6px;background:var(--gold-bg);border:1px solid var(--gold-bdr);
-  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--c1);flex-shrink:0}
-.sec-title{font-size:14px;font-weight:500;color:var(--c1);font-family:'Cormorant Garamond',serif;letter-spacing:0.03em}
+.sec{
+  background:var(--surf);border:1px solid var(--border);border-radius:6px;
+  margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)
+}
+.sec-head{
+  background:var(--surf2);border-bottom:1px solid var(--border);
+  padding:13px 18px;display:flex;align-items:center;gap:10px;border-left:3px solid var(--c2)
+}
+.sec-icon{
+  width:26px;height:26px;border-radius:4px;background:var(--accent-bg);border:1px solid var(--accent-bdr);
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--c1);flex-shrink:0
+}
+.sec-title{
+  font-size:14px;font-weight:500;color:var(--c1);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;letter-spacing:0.02em
+}
 .sec-body{padding:18px}
 
 /* ═══════════════════════════════════════
@@ -96,56 +120,75 @@ header{background:var(--c1);position:sticky;top:0;z-index:300;box-shadow:0 2px 2
 @media(max-width:580px){.g2,.g3{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:5px}
 .mb{margin-bottom:14px}
-label{font-size:12px;font-weight:400;color:var(--text2);letter-spacing:0.05em;text-transform:uppercase}
+label{
+  font-size:12px;font-weight:400;color:var(--text2);letter-spacing:0.05em;text-transform:uppercase;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif
+}
 label .unit{font-weight:400;color:var(--text3);text-transform:none}
 
 input[type="text"],input[type="number"],select,input[type="file"]{
-  height:40px;width:100%;border:1px solid var(--border);border-radius:8px;
+  height:40px;width:100%;border:1px solid var(--border);border-radius:4px;
   padding:0 12px;font-size:14px;color:var(--text);background:var(--surf);
-  font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none}
-input:focus,select:focus{border-color:var(--c2);box-shadow:0 0 0 3px var(--c2a)}
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none
+}
+input:focus,select:focus{border-color:var(--c1);box-shadow:0 0 0 2px var(--c2a)}
 input::placeholder{color:var(--text3)}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2393a5b8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;cursor:pointer}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%236c757d'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;cursor:pointer
+}
 input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 .num-display{/* used for comma-formatted display */}
 
 /* ═══════════════════════════════════════
    Alerts
 ═══════════════════════════════════════ */
-.alert{display:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:500;
-  margin-top:8px;border-left:3px solid}
+.alert{
+  display:none;border-radius:4px;padding:9px 14px;font-size:12px;font-weight:500;
+  margin-top:8px;border-left:3px solid
+}
 .alert.warn{background:var(--warn-bg);border-color:var(--warn-bdr);color:var(--warn)}
 .alert.err{background:var(--err-bg);border-color:var(--err-bdr);color:var(--err)}
 .alert.show{display:block}
-.field-err{border-color:var(--err-bdr)!important;box-shadow:0 0 0 3px rgba(217,74,58,0.15)!important}
+.field-err{border-color:var(--err-bdr)!important;box-shadow:0 0 0 2px rgba(192,57,43,0.12)!important}
 
 /* ═══════════════════════════════════════
    CSV
 ═══════════════════════════════════════ */
-.csv-area{background:var(--surf2);border:1.5px dashed var(--border);border-radius:10px;
-  padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.csv-area{
+  background:var(--surf2);border:1.5px dashed var(--border);border-radius:4px;
+  padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap
+}
 .csv-label{font-size:12px;color:var(--text2);flex:1;min-width:160px}
 .csv-label strong{color:var(--c1)}
-.btn-sm{height:34px;padding:0 14px;border-radius:7px;border:1px solid var(--border);
+.btn-sm{
+  height:34px;padding:0 14px;border-radius:4px;border:1px solid var(--border);
   background:var(--surf);color:var(--text2);font-size:12px;font-weight:500;
-  font-family:inherit;cursor:pointer;transition:all .15s;white-space:nowrap}
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  cursor:pointer;transition:all .15s;white-space:nowrap
+}
 .btn-sm:hover{background:var(--c1a);border-color:var(--c1);color:var(--c1)}
 
 /* ═══════════════════════════════════════
    Nav Buttons
 ═══════════════════════════════════════ */
 .nav-row{display:flex;gap:12px;margin-top:20px;justify-content:flex-end}
-.btn-back{height:44px;padding:0 24px;border-radius:9px;border:1.5px solid var(--border);
+.btn-back{
+  height:44px;padding:0 24px;border-radius:4px;border:1.5px solid var(--border);
   background:var(--surf);color:var(--text2);font-size:14px;font-weight:500;
-  font-family:inherit;cursor:pointer;transition:all .15s}
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;cursor:pointer;transition:all .15s
+}
 .btn-back:hover{border-color:var(--c1);color:var(--c1)}
-.btn-next,.btn-run{height:44px;padding:0 32px;border-radius:9px;border:none;
-  background:var(--c1);color:#fff;font-size:14px;font-weight:400;
-  font-family:inherit;cursor:pointer;letter-spacing:0.06em;transition:all .15s}
-.btn-next:hover,.btn-run:hover{background:var(--c2);box-shadow:0 0 0 2px var(--gold-bdr)}
+.btn-next,.btn-run{
+  height:44px;padding:0 32px;border-radius:4px;border:none;
+  background:var(--c2);color:#fff;font-size:14px;font-weight:400;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  cursor:pointer;letter-spacing:0.06em;transition:all .15s
+}
+.btn-next:hover,.btn-run:hover{background:var(--c1);box-shadow:0 0 0 2px var(--accent-bdr)}
 .btn-next:active,.btn-run:active{transform:scale(0.98)}
-.btn-run{background:var(--c1);border:1px solid var(--gold-bdr);padding:0 48px;height:48px;font-size:15px}
+.btn-run{background:var(--c1);border:1px solid var(--accent-bdr);padding:0 48px;height:48px;font-size:15px}
 
 /* ═══════════════════════════════════════
    Phase panels
@@ -156,34 +199,56 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 /* ═══════════════════════════════════════
    Results
 ═══════════════════════════════════════ */
-.res-header{background:var(--surf);border:1px solid var(--border2);border-radius:12px;
-  padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px}
-.res-avatar{width:44px;height:44px;border-radius:10px;background:var(--c1);
+.res-header{
+  background:var(--surf);border:1px solid var(--border);border-radius:6px;
+  padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px
+}
+.res-avatar{
+  width:44px;height:44px;border-radius:6px;background:var(--c1);
   display:flex;align-items:center;justify-content:center;color:#fff;font-weight:500;
-  font-size:16px;flex-shrink:0}
-.res-company{font-size:17px;font-weight:400;color:var(--c1);font-family:'Cormorant Garamond',serif;letter-spacing:0.03em}
+  font-size:16px;flex-shrink:0
+}
+.res-company{
+  font-size:17px;font-weight:400;color:var(--c1);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;letter-spacing:0.02em
+}
 .res-sub{font-size:12px;color:var(--text2);margin-top:2px}
 
 /* Gauge */
 .gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:20px}
 .gauge-svg{width:180px;height:100px;overflow:visible}
-.gauge-score{font-size:32px;font-weight:400;fill:var(--c1);font-family:'Cormorant Garamond',serif}
-.gauge-max{font-size:13px;fill:var(--text3);font-family:'Hiragino Kaku Gothic ProN',sans-serif}
-.rank-tag{display:inline-block;margin-top:10px;padding:4px 16px;border-radius:20px;
-  font-size:13px;font-weight:500;border:1.5px solid}
+.gauge-score{
+  font-size:32px;font-weight:400;fill:var(--c1);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif
+}
+.gauge-max{
+  font-size:13px;fill:var(--text3);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif
+}
+.rank-tag{
+  display:inline-block;margin-top:10px;padding:4px 16px;border-radius:3px;
+  font-size:13px;font-weight:500;border:1.5px solid
+}
 
 /* KPI */
 .kpi-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
 @media(max-width:540px){.kpi-row{grid-template-columns:1fr 1fr}}
-.kpi{background:var(--surf2);border:1px solid var(--border2);border-radius:10px;padding:14px}
-.kpi-label{font-size:11px;font-weight:400;color:var(--text2);letter-spacing:0.08em;
-  text-transform:uppercase;margin-bottom:6px}
-.kpi-val{font-size:22px;font-weight:400;color:var(--c1);font-family:'Cormorant Garamond',serif}
+.kpi{background:var(--surf2);border:1px solid var(--border);border-radius:4px;padding:14px}
+.kpi-label{
+  font-size:11px;font-weight:400;color:var(--text2);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:6px
+}
+.kpi-val{
+  font-size:22px;font-weight:400;color:var(--c1);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif
+}
 .kpi-unit{font-size:12px;font-weight:400;margin-left:2px}
 
 /* Route banner */
-.route-banner{border-radius:10px;padding:14px 20px;font-size:15px;font-weight:500;
-  margin-bottom:8px;border-left:4px solid;letter-spacing:0.02em}
+.route-banner{
+  border-radius:4px;padding:14px 20px;font-size:15px;font-weight:500;
+  margin-bottom:8px;border-left:4px solid;letter-spacing:0.02em
+}
 .route-A{background:var(--green-bg);border-color:var(--green-bdr);color:var(--green)}
 .route-B{background:var(--lime-bg);border-color:var(--lime-bdr);color:var(--lime)}
 .route-C{background:var(--amber-bg);border-color:var(--amber-bdr);color:var(--amber)}
@@ -192,41 +257,65 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 /* Score breakdown */
 .bd-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:540px){.bd-row{grid-template-columns:1fr}}
-.sc-card{background:var(--surf2);border:1px solid var(--border2);border-radius:10px;padding:14px}
-.sc-label{font-size:11px;font-weight:400;color:var(--text2);letter-spacing:0.08em;
-  text-transform:uppercase;margin-bottom:6px}
-.sc-val{font-size:24px;font-weight:400;color:var(--c1);font-family:'Cormorant Garamond',serif;margin-bottom:8px}
-.prog-track{height:5px;background:var(--border2);border-radius:3px;overflow:hidden;margin-bottom:6px}
-.prog-bar{height:100%;background:var(--gold);border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.sc-card{background:var(--surf2);border:1px solid var(--border);border-radius:4px;padding:14px}
+.sc-label{
+  font-size:11px;font-weight:400;color:var(--text2);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:6px
+}
+.sc-val{
+  font-size:24px;font-weight:400;color:var(--c1);
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;margin-bottom:8px
+}
+.prog-track{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.prog-bar{height:100%;background:var(--c2);border-radius:2px;transition:width .8s cubic-bezier(.4,0,.2,1)}
 .sc-detail{font-size:12px;color:var(--text3)}
 
 /* Flags */
-.flag-item{background:var(--amber-bg);border-left:3px solid var(--amber-bdr);border-radius:8px;
-  padding:9px 14px;font-size:12px;color:var(--amber);font-weight:500;margin-bottom:8px}
-.no-flag{background:var(--green-bg);border:1px solid var(--green-bdr);border-radius:8px;
-  padding:10px 14px;font-size:13px;color:var(--green);font-weight:500}
+.flag-item{
+  background:var(--amber-bg);border-left:3px solid var(--amber-bdr);border-radius:4px;
+  padding:9px 14px;font-size:12px;color:var(--amber);font-weight:500;margin-bottom:8px
+}
+.no-flag{
+  background:var(--green-bg);border:1px solid var(--green-bdr);border-radius:4px;
+  padding:10px 14px;font-size:13px;color:var(--green);font-weight:500
+}
 
 /* Result actions */
 .res-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.btn-pdf{height:42px;padding:0 22px;border-radius:9px;border:1.5px solid var(--c1);
-  background:var(--c1);color:#fff;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .15s}
+.btn-pdf{
+  height:42px;padding:0 22px;border-radius:4px;border:1.5px solid var(--c1);
+  background:var(--c1);color:#fff;font-size:13px;font-weight:500;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;cursor:pointer;transition:all .15s
+}
 .btn-pdf:hover{background:var(--c2);border-color:var(--c2)}
-.btn-csv-out{height:42px;padding:0 22px;border-radius:9px;border:1.5px solid var(--border);
-  background:var(--surf);color:var(--text2);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .15s}
+.btn-csv-out{
+  height:42px;padding:0 22px;border-radius:4px;border:1.5px solid var(--border);
+  background:var(--surf);color:var(--text2);font-size:13px;font-weight:500;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;cursor:pointer;transition:all .15s
+}
 .btn-csv-out:hover{border-color:var(--c1);color:var(--c1)}
-.btn-restart{height:42px;padding:0 22px;border-radius:9px;border:1.5px solid var(--border);
-  background:var(--surf);color:var(--text2);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .15s}
+.btn-restart{
+  height:42px;padding:0 22px;border-radius:4px;border:1.5px solid var(--border);
+  background:var(--surf);color:var(--text2);font-size:13px;font-weight:500;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;cursor:pointer;transition:all .15s
+}
 .btn-restart:hover{border-color:var(--c1);color:var(--c1)}
 
-.disclaimer{font-size:12px;color:var(--text3);border-top:1px solid var(--border2);
-  padding-top:14px;margin-top:20px;line-height:1.8}
+.disclaimer{
+  font-size:12px;color:var(--text3);border-top:1px solid var(--border2);
+  padding-top:14px;margin-top:20px;line-height:1.8
+}
 .disc-summary{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:6px}
-.disc-toggle{background:none;border:1px solid var(--gold-bdr);border-radius:4px;
-  padding:3px 10px;font-size:11px;color:var(--text3);cursor:pointer;font-family:inherit;
-  transition:all .15s}
-.disc-toggle:hover{background:var(--gold-bg);color:var(--c1)}
-.disc-full{display:none;margin-top:10px;background:var(--surf2);border:1px solid var(--border2);
-  border-left:2px solid var(--gold-bdr);border-radius:6px;overflow:hidden}
+.disc-toggle{
+  background:none;border:1px solid var(--border);border-radius:3px;
+  padding:3px 10px;font-size:11px;color:var(--text3);cursor:pointer;
+  font-family:"UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;transition:all .15s
+}
+.disc-toggle:hover{background:var(--accent-bg);color:var(--c1)}
+.disc-full{
+  display:none;margin-top:10px;background:var(--surf2);border:1px solid var(--border);
+  border-left:2px solid var(--c2);border-radius:4px;overflow:hidden
+}
 .disc-full.open{display:block}
 .disc-body{padding:14px 16px;font-size:11px;color:var(--text2);line-height:1.9;white-space:pre-wrap}
 .disc-body p{margin-bottom:10px}
@@ -254,8 +343,255 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
    Utility
 ═══════════════════════════════════════ */
 .divider{border:none;border-top:1px solid var(--border2);margin:16px 0}
-.sec-subtitle{font-size:13px;font-weight:500;color:var(--c1);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border2)}
+.sec-subtitle{
+  font-size:13px;font-weight:500;color:var(--c1);margin-bottom:12px;
+  padding-bottom:8px;border-bottom:1px solid var(--border2)
+}
+
+/* ══════════════════════════════════════
+   GATE MODAL
+══════════════════════════════════════ */
+.gate-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.60);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.gate-overlay.active { display: flex; }
+
+.gate-box {
+  background: #fff;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.20);
+  font-family: "UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+}
+
+/* ── Step A: 注意事項 ── */
+.gate-notice {
+  padding: 32px 28px 24px;
+}
+.gate-notice h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #4A5568;
+  padding-bottom: 10px;
+}
+.gate-notice-body {
+  font-size: 0.8rem;
+  color: #495057;
+  line-height: 1.9;
+  margin-bottom: 20px;
+  background: #F8F9FA;
+  border-radius: 4px;
+  padding: 14px 16px;
+  border-left: 3px solid #4A5568;
+}
+.gate-notice-body p { margin-bottom: 8px; }
+.gate-notice-body p:last-child { margin-bottom: 0; }
+.gate-notice-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #333333;
+  line-height: 1.6;
+}
+.gate-notice-agree input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  accent-color: #4A5568;
+  cursor: pointer;
+}
+
+/* ── Step B: 企業情報フォーム ── */
+.gate-form {
+  padding: 28px 28px 24px;
+  display: none;
+}
+.gate-form.active { display: block; }
+.gate-form h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 6px;
+  border-bottom: 2px solid #4A5568;
+  padding-bottom: 10px;
+}
+.gate-form-sub {
+  font-size: 0.75rem;
+  color: #868E96;
+  margin-bottom: 20px;
+}
+.gate-field {
+  margin-bottom: 14px;
+}
+.gate-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 5px;
+  letter-spacing: 0.03em;
+}
+.gate-label .req {
+  color: #c0392b;
+  margin-left: 4px;
+  font-size: 0.7rem;
+}
+.gate-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #CED4DA;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: "UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  color: #333333;
+  background: #F8F9FA;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.gate-input:focus {
+  outline: none;
+  border-color: #2C3E50;
+  background: #fff;
+}
+.gate-input.err { border-color: #c0392b; }
+.gate-err-msg {
+  font-size: 0.7rem;
+  color: #c0392b;
+  margin-top: 3px;
+  display: none;
+}
+.gate-err-msg.show { display: block; }
+.gate-sending {
+  text-align: center;
+  padding: 20px 0;
+  display: none;
+  color: #868E96;
+  font-size: 0.85rem;
+}
+.gate-sending.show { display: block; }
+
+/* ── Step C: PASS入力 ── */
+.gate-pass {
+  padding: 32px 28px 28px;
+  display: none;
+}
+.gate-pass.active { display: block; }
+.gate-pass h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #4A5568;
+  padding-bottom: 10px;
+}
+.gate-pass-msg {
+  font-size: 0.82rem;
+  color: #495057;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.gate-pass-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.gate-pass-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1.5px solid #CED4DA;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: monospace;
+  letter-spacing: 0.15em;
+  text-align: center;
+  color: #333333;
+  background: #F8F9FA;
+  transition: border-color 0.2s;
+}
+.gate-pass-input:focus { outline: none; border-color: #2C3E50; }
+.gate-pass-input.err { border-color: #c0392b; }
+.gate-pass-err {
+  font-size: 0.75rem;
+  color: #c0392b;
+  margin-bottom: 12px;
+  display: none;
+}
+.gate-pass-err.show { display: block; }
+.gate-resend {
+  font-size: 0.73rem;
+  color: #868E96;
+  text-align: center;
+  margin-top: 14px;
+}
+.gate-resend a {
+  color: #2C3E50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.gate-resend a:hover { color: #4A5568; }
+
+/* ── Shared Buttons ── */
+.gate-btn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: "UD Digi Kyokasho NP-R","BIZ UDGothic","Meiryo",sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.gate-btn-primary {
+  background: #2C3E50;
+  color: #fff;
+}
+.gate-btn-primary:hover { background: #4A5568; transform: translateY(-1px); }
+.gate-btn-primary:disabled { background: #adb5bd; cursor: not-allowed; transform: none; }
+.gate-btn-secondary {
+  background: transparent;
+  color: #868E96;
+  font-size: 0.78rem;
+  font-weight: 400;
+  padding: 8px;
+  margin-top: 6px;
+}
+.gate-btn-secondary:hover { color: #495057; }
+.gate-step-indicator {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 14px 0 4px;
+}
+.gate-step-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #DEE2E6;
+  transition: background 0.3s;
+}
+.gate-step-dot.active { background: #2C3E50; }
+.gate-step-dot.done { background: #4A5568; }
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -296,28 +632,7 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 ════════════════════════════ -->
 <div class="phase active" id="phaseInput">
 
-  <!-- CSV Import -->
-  <div class="sec">
-    <div class="sec-head">
-      <div class="sec-icon">📥</div>
-      <span class="sec-title">CSVインポート</span>
-    </div>
-    <div class="sec-body">
-      <div class="csv-area">
-        <div class="csv-label"><strong>CSVファイルを読み込む</strong><br>テンプレートに合わせたCSVを選択してください</div>
-        <button class="btn-sm" onclick="downloadTemplate()">📄 テンプレートDL</button>
-        <label style="text-transform:none;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;
-          background:var(--surf);border:1px solid var(--border);border-radius:7px;
-          padding:0 14px;height:34px;display:inline-flex;align-items:center;gap:6px">
-          📂 CSVを選択
-          <input type="file" accept=".csv" id="csvFile" onchange="importCSV(this)" style="display:none">
-        </label>
-      </div>
-      <div id="csvAlert" class="alert warn" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- P1: 案件基本情報 -->
+   <!-- P1: 案件基本情報 -->
   <div class="sec">
     <div class="sec-head">
       <div class="sec-icon">📁</div>
@@ -354,8 +669,8 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
       <div id="purposeAlert" class="alert warn">▲ 要注意資金使途です。追加ヒアリングを推奨します。</div>
       <div class="g2" style="margin-top:14px">
         <div class="field">
-          <label>希望調達額 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="amount" class="num-input" value="5,000,000" autocomplete="off">
+          <label>希望調達額 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="amount" class="num-input" value="500" autocomplete="off">
         </div>
         <div class="field">
           <label>希望返済期間 <span class="unit">（月）</span></label>
@@ -374,52 +689,52 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
     <div class="sec-body">
       <div class="g2 mb">
         <div class="field">
-          <label>年商・前期実績 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="sales_prev" class="num-input" oninput="checkDiv()" value="100,000,000" autocomplete="off">
+          <label>年商・前期実績 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="sales_prev" class="num-input" oninput="checkDiv()" value="10,000" autocomplete="off">
         </div>
         <div class="field">
-          <label>年商・今期予測 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="sales_curr" class="num-input" oninput="checkDiv()" value="100,000,000" autocomplete="off">
+          <label>年商・今期予測 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="sales_curr" class="num-input" oninput="checkDiv()" value="10,500" autocomplete="off">
         </div>
       </div>
       <div id="salesAlert" class="alert warn"></div>
       <div class="g2 mb" style="margin-top:14px">
         <div class="field">
-          <label>営業利益・前期実績 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="op_prev" class="num-input" value="5,000,000" autocomplete="off">
+          <label>営業利益・前期実績 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="op_prev" class="num-input" value="180" autocomplete="off">
         </div>
         <div class="field">
-          <label>営業利益・今期予測 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="op_curr" class="num-input" value="5,000,000" autocomplete="off">
-        </div>
-      </div>
-      <div class="g2 mb">
-        <div class="field">
-          <label>減価償却費 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="dep" class="num-input" value="0" autocomplete="off">
-        </div>
-        <div class="field">
-          <label>現預金残高 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="cash" class="num-input" value="3,000,000" autocomplete="off">
+          <label>営業利益・今期予測 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="op_curr" class="num-input" value="200" autocomplete="off">
         </div>
       </div>
       <div class="g2 mb">
         <div class="field">
-          <label>借入総額・有利子負債 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="debt" class="num-input" value="30,000,000" autocomplete="off">
+          <label>減価償却費 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="dep" class="num-input" value="35" autocomplete="off">
         </div>
         <div class="field">
-          <label>純資産・自己資本 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="equity" class="num-input" value="20,000,000" autocomplete="off">
+          <label>現預金残高 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="cash" class="num-input" value="180" autocomplete="off">
+        </div>
+      </div>
+      <div class="g2 mb">
+        <div class="field">
+          <label>借入総額・有利子負債 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="debt" class="num-input" value="2,500" autocomplete="off">
+        </div>
+        <div class="field">
+          <label>純資産・自己資本 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="equity" class="num-input" value="1,700" autocomplete="off">
         </div>
       </div>
       <div class="g2">
         <div class="field">
-          <label>役員借入金 <span class="unit">（円）</span></label>
-          <input type="text" inputmode="numeric" id="exec_loan" class="num-input" value="0" autocomplete="off">
+          <label>役員借入金 <span class="unit">（万円）</span></label>
+          <input type="text" inputmode="numeric" id="exec_loan" class="num-input" value="100" autocomplete="off">
         </div>
         <div class="field">
-          <label>役員貸付金 <span class="unit">（円）</span></label>
+          <label>役員貸付金 <span class="unit">（万円）</span></label>
           <input type="text" inputmode="numeric" id="exec_lending" class="num-input" value="0" autocomplete="off">
         </div>
       </div>
@@ -483,7 +798,7 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
 
   <div class="nav-row">
     <button class="btn-back" onclick="goPhase1()">← 戻る</button>
-    <button class="btn-run" onclick="runScore()">審査を実行する</button>
+    <button class="btn-run" onclick="gateOpen()">審査を実行する</button>
   </div>
 </div>
 
@@ -577,13 +892,6 @@ input[type="file"]{padding:8px 12px;height:auto;cursor:pointer;font-size:13px}
   <div class="sec">
     <div class="sec-head"><div class="sec-icon">⚠️</div><span class="sec-title">警告フラグ</span></div>
     <div class="sec-body"><div id="res-flags"></div></div>
-  </div>
-
-  <!-- Actions -->
-  <div class="res-actions">
-    <button class="btn-pdf" onclick="printPDF()">🖨 PDF出力</button>
-    <button class="btn-csv-out" onclick="exportCSV()">📤 結果CSVエクスポート</button>
-    <button class="btn-restart" onclick="restart()">← 別の案件を入力</button>
   </div>
 
   <div class="disclaimer">
@@ -729,7 +1037,7 @@ function runScore(){
   const co=d.company||'（会社名未入力）';
   document.getElementById('res-avatar').textContent=co.charAt(0)||'?';
   document.getElementById('res-company').textContent=co;
-  document.getElementById('res-sub').textContent=d.industry+' ／ 希望調達額：'+d.amount.toLocaleString('ja-JP')+'円';
+  document.getElementById('res-sub').textContent=d.industry+' ／ 希望調達額：'+d.amount.toLocaleString('ja-JP')+'万円';
 
   // Gauge animation
   const totalRounded=Math.round(r.total*10)/10;
@@ -755,7 +1063,7 @@ function runScore(){
   document.getElementById('kpi-op').innerHTML=(r.op_rate*100).toFixed(2)+'<span class="kpi-unit">%</span>';
 
   // Route
-  const rNames={A:'ルートA：自社融資',B:'ルートB：自社ファクタリング',C:'ルートC：外部ノンバンク送客'};
+  const rNames={A:'ルート：融資検討可能',B:'ルート：ファクタリングの方が優位な可能性あり', C:'ルート：ノンバンク検討の可能性あり'};
   const banner=document.getElementById('res-route-banner');
   banner.className='route-banner route-'+r.route;
   banner.textContent=rNames[r.route];
@@ -794,18 +1102,18 @@ function runScore(){
 function buildPrintSummary(d){
   const rows=[
     ['会社名',d.company||'（未入力）'],['業種',d.industry],['設立年数',d.years+'年'],
-    ['資金使途',d.purpose],['希望調達額',d.amount.toLocaleString('ja-JP')+'円'],
+    ['資金使途',d.purpose],['希望調達額',d.amount.toLocaleString('ja-JP')+'万円'],
     ['希望返済期間',d.repayment+'ヶ月'],
-    ['年商・前期',d.sales_prev.toLocaleString('ja-JP')+'円'],
-    ['年商・今期',d.sales_curr.toLocaleString('ja-JP')+'円'],
-    ['営業利益・前期',d.op_prev.toLocaleString('ja-JP')+'円'],
-    ['営業利益・今期',d.op_curr.toLocaleString('ja-JP')+'円'],
-    ['減価償却費',d.dep.toLocaleString('ja-JP')+'円'],
-    ['現預金残高',d.cash.toLocaleString('ja-JP')+'円'],
-    ['借入総額',d.debt.toLocaleString('ja-JP')+'円'],
-    ['純資産',d.equity.toLocaleString('ja-JP')+'円'],
-    ['役員借入金',d.exec_loan.toLocaleString('ja-JP')+'円'],
-    ['役員貸付金',d.exec_lending.toLocaleString('ja-JP')+'円'],
+    ['年商・前期',d.sales_prev.toLocaleString('ja-JP')+'万円'],
+    ['年商・今期',d.sales_curr.toLocaleString('ja-JP')+'万円'],
+    ['営業利益・前期',d.op_prev.toLocaleString('ja-JP')+'万円'],
+    ['営業利益・今期',d.op_curr.toLocaleString('ja-JP')+'万円'],
+    ['減価償却費',d.dep.toLocaleString('ja-JP')+'万円'],
+    ['現預金残高',d.cash.toLocaleString('ja-JP')+'万円'],
+    ['借入総額',d.debt.toLocaleString('ja-JP')+'万円'],
+    ['純資産',d.equity.toLocaleString('ja-JP')+'万円'],
+    ['役員借入金',d.exec_loan.toLocaleString('ja-JP')+'万円'],
+    ['役員貸付金',d.exec_lending.toLocaleString('ja-JP')+'万円'],
     ['不動産担保',d.real_estate?'有':'無'],['証券担保',d.securities?'有':'無'],
     ['売掛先属性',d.receivable],['税金滞納',d.tax_delinquent?'有':'無']
   ];
@@ -813,7 +1121,7 @@ function buildPrintSummary(d){
 }
 
 // ─── Google Sheets保存（GAS経由） ───
-const GAS_URL='https://script.google.com/macros/s/AKfycbyu8gkV8dnvOa8gXQ6_rq7XNYxY82cPgxV6ZOVVBUxLJFNyKfrOTL2Wj6SMxRv2pOLO/exec';
+const GAS_URL='https://script.google.com/macros/s/AKfycbwyc5kSgjSX5xK3nAy7KDRpYmP-kOy5hzoVnI6y23WqDdxK-q6XvqIyy1omUD6P5OvHww/exec';
 
 function saveToSheet(d,r){
   const now=new Date().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'});
@@ -867,21 +1175,6 @@ function restart(){
   document.getElementById('bar-profit').style.width='0%';
   document.getElementById('gaugeArc').style.strokeDashoffset='220';
   showPhase('phaseInput');setStep(1);
-}
-
-// ─── CSV Template Download ───
-const CSV_HEADERS=['会社名','業種','設立年数(年)','資金使途','希望調達額(円)','希望返済期間(月)',
-  '年商前期(円)','年商今期(円)','営業利益前期(円)','営業利益今期(円)',
-  '減価償却費(円)','現預金残高(円)','借入総額(円)','純資産(円)',
-  '役員借入金(円)','役員貸付金(円)','不動産担保(有/無)','証券担保(有/無)',
-  '売掛先属性(A/B/C/D)','税金滞納(有/無)'];
-
-function downloadTemplate(){
-  const sample=['テスト株式会社','製造業','5','増加運転資金','5000000','36',
-    '100000000','100000000','5000000','5000000','0','3000000','30000000','20000000',
-    '0','0','無','無','A','無'];
-  const csv=CSV_HEADERS.join(',')+'\n'+sample.join(',');
-  dlCSV(csv,'nexcess_scoring_template.csv');
 }
 
 function dlCSV(content,filename){
@@ -1013,6 +1306,275 @@ function toggleDisc(){
   var open=el.classList.toggle('open');
   btn.textContent=open?'注意事項を閉じる ▴':'注意事項全文を見る ▾';
 }
+
+// ══════════════════════════════════════════════
+//  GATE SYSTEM
+// ══════════════════════════════════════════════
+var _gatePass = '';  // 生成したPASSを保持
+
+// ── ゲートを開く
+function gateOpen() {
+  _gatePass = '';
+  document.getElementById('agreeCheck').checked = false;
+  document.getElementById('gateAgreBtn').disabled = true;
+  document.getElementById('gf-company').value = '';
+  document.getElementById('gf-industry').value = '';
+  document.getElementById('gf-email').value = '';
+  document.getElementById('gf-pass').value = '';
+  ['gf-company-err','gf-industry-err','gf-email-err','gatePassErr'].forEach(function(id){
+    document.getElementById(id).classList.remove('show');
+  });
+  ['gf-company','gf-industry','gf-email'].forEach(function(id){
+    document.getElementById(id).classList.remove('err');
+  });
+  _gateShowStep('A');
+  document.getElementById('gateOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// ── ゲートを閉じる
+function gateClose() {
+  document.getElementById('gateOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ── ステップ表示制御
+function _gateShowStep(s) {
+  var steps = { A: 'gateStepA', B: 'gateStepB', C: 'gateStepC' };
+  Object.keys(steps).forEach(function(k) {
+    var el = document.getElementById(steps[k]);
+    if (k === s) { el.classList.add('active'); el.style.display = 'block'; }
+    else { el.classList.remove('active'); el.style.display = 'none'; }
+  });
+  var dots = ['gd1', 'gd2', 'gd3'];
+  var idx = Object.keys(steps).indexOf(s);
+  dots.forEach(function(id, i) {
+    var el = document.getElementById(id);
+    el.className = 'gate-step-dot';
+    if (i < idx) el.classList.add('done');
+    else if (i === idx) el.classList.add('active');
+  });
+  document.getElementById('gateBox').scrollTop = 0;
+}
+
+// ── Step A: 同意チェックボックス
+function gateAgreeChange() {
+  document.getElementById('gateAgreBtn').disabled =
+    !document.getElementById('agreeCheck').checked;
+}
+
+// ── Step A → Step B
+function gateGoForm() {
+  _gateShowStep('B');
+}
+
+// ── Step B → Step A（戻る）
+function gateBackToA() {
+  _gateShowStep('A');
+}
+
+// ── 6桁PASSを生成
+function _genPass() {
+  var n = Math.floor(100000 + Math.random() * 900000).toString();
+  return n;
+}
+
+// ── Step B: フォーム送信
+function gateSubmitForm() {
+  var company  = document.getElementById('gf-company').value.trim();
+  var industry = document.getElementById('gf-industry').value;
+  var email    = document.getElementById('gf-email').value.trim();
+  var ok = true;
+
+  // バリデーション
+  if (!company) {
+    document.getElementById('gf-company').classList.add('err');
+    document.getElementById('gf-company-err').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('gf-company').classList.remove('err');
+    document.getElementById('gf-company-err').classList.remove('show');
+  }
+  if (!industry) {
+    document.getElementById('gf-industry').classList.add('err');
+    document.getElementById('gf-industry-err').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('gf-industry').classList.remove('err');
+    document.getElementById('gf-industry-err').classList.remove('show');
+  }
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRe.test(email)) {
+    document.getElementById('gf-email').classList.add('err');
+    document.getElementById('gf-email-err').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('gf-email').classList.remove('err');
+    document.getElementById('gf-email-err').classList.remove('show');
+  }
+  if (!ok) return;
+
+  _gatePass = _genPass();
+  _gateSendMail(company, industry, email, _gatePass);
+}
+
+// ── EmailJS でメール送信
+function _gateSendMail(company, industry, email, pass) {
+  document.getElementById('gateFormBtns').style.display = 'none';
+  document.getElementById('gateSending').classList.add('show');
+
+  emailjs.init('s45-Ce7lRsbQtqlNt');
+
+  var templateParams = {
+    to_email : email,
+    company  : company,
+    industry : industry,
+    pass     : pass
+  };
+
+  emailjs.send('service_xh3oajd', 'template_y7x76sf', templateParams)
+    .then(function() {
+      document.getElementById('gateSending').classList.remove('show');
+      document.getElementById('gateFormBtns').style.display = 'block';
+      document.getElementById('gatePassMsg').innerHTML =
+        '<strong>' + email + '</strong> に<br>パスワードを送信しました。ご確認ください。';
+      _gateShowStep('C');
+    })
+    .catch(function(err) {
+      document.getElementById('gateSending').classList.remove('show');
+      document.getElementById('gateFormBtns').style.display = 'block';
+      console.error('EmailJS error:', err);
+      alert('送信エラーが発生しました。時間をおいて再度お試しください。');
+    });
+}
+
+
+// ── Step C: PASS照合
+function gateCheckPass() {
+  var entered = document.getElementById('gf-pass').value.trim();
+  if (entered === _gatePass && _gatePass !== '') {
+    gateClose();
+    runScore();  // 元の審査実行
+  } else {
+    document.getElementById('gf-pass').classList.add('err');
+    document.getElementById('gatePassErr').classList.add('show');
+    document.getElementById('gf-pass').value = '';
+  }
+}
+
+// ── PASSキー入力でエラーをクリア
+document.addEventListener('DOMContentLoaded', function() {
+  var passInput = document.getElementById('gf-pass');
+  if (passInput) {
+    passInput.addEventListener('input', function() {
+      this.classList.remove('err');
+      document.getElementById('gatePassErr').classList.remove('show');
+    });
+    passInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') gateCheckPass();
+    });
+  }
+});
+
+// ── 再送
+function gateResend() {
+  var email = document.getElementById('gf-email').value;
+  var company = document.getElementById('gf-company').value;
+  var industry = document.getElementById('gf-industry').value;
+  _gatePass = _genPass();
+  document.getElementById('gateSending').style.display = 'block';
+  _gateSendMail(company, industry, email, _gatePass);
+}
 </script>
+
+<!-- ══ GATE OVERLAY ══ -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box" id="gateBox">
+
+    <!-- ステップインジケーター -->
+    <div class="gate-step-indicator">
+      <div class="gate-step-dot active" id="gd1"></div>
+      <div class="gate-step-dot" id="gd2"></div>
+      <div class="gate-step-dot" id="gd3"></div>
+    </div>
+
+    <!-- ──── Step A: 注意事項 ──── -->
+    <div class="gate-notice" id="gateStepA">
+      <h2>⚠️ スコアリング結果の閲覧前に</h2>
+      <div class="gate-notice-body">
+        <p>本システムは、金融機関の審査実務をベースに構築した独自スコアリングモデルであり、融資・ファクタリングの審査結果を保証するものではありません。</p>
+        <p>算出結果はあくまで参考値です。最終的な融資判断は各金融機関または当社の審査基準に基づき行われます。</p>
+        <p>入力いただいた財務情報は、サービス改善および個別フォローの目的で利用する場合があります。第三者への無断提供は行いません。</p>
+        <p>本ツールの利用は<strong>日本国内の法人・個人事業主</strong>を対象とします。</p>
+      </div>
+      <label class="gate-notice-agree" id="agreeLabel">
+        <input type="checkbox" id="agreeCheck" onchange="gateAgreeChange()">
+        <span>上記注意事項を確認し、内容に同意します</span>
+      </label>
+      <button class="gate-btn gate-btn-primary" id="gateAgreBtn" onclick="gateGoForm()" disabled>
+        同意して進む →
+      </button>
+      <button class="gate-btn gate-btn-secondary" onclick="gateClose()">キャンセル</button>
+    </div>
+
+    <!-- ──── Step B: 企業情報フォーム ──── -->
+    <div class="gate-form" id="gateStepB">
+      <h2>📋 企業情報のご登録</h2>
+      <p class="gate-form-sub">登録いただいたメールアドレスに結果閲覧用パスワードをお送りします。</p>
+
+      <div class="gate-field">
+        <label class="gate-label">企業名 <span class="req">*</span></label>
+        <input class="gate-input" id="gf-company" type="text" placeholder="例：株式会社〇〇">
+        <div class="gate-err-msg" id="gf-company-err">企業名を入力してください</div>
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">業種 <span class="req">*</span></label>
+        <select class="gate-input" id="gf-industry">
+          <option value="">選択してください</option>
+          <option>製造業</option>
+          <option>卸売業・小売業</option>
+          <option>建設業</option>
+          <option>不動産業</option>
+          <option>飲食・宿泊業</option>
+          <option>情報通信業</option>
+          <option>運輸・物流業</option>
+          <option>医療・福祉</option>
+          <option>サービス業（その他）</option>
+          <option>個人事業主</option>
+          <option>その他</option>
+        </select>
+        <div class="gate-err-msg" id="gf-industry-err">業種を選択してください</div>
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">メールアドレス <span class="req">*</span></label>
+        <input class="gate-input" id="gf-email" type="email" placeholder="例：info@example.com">
+        <div class="gate-err-msg" id="gf-email-err">有効なメールアドレスを入力してください</div>
+      </div>
+
+      <div class="gate-sending" id="gateSending">
+        <p>⏳ パスワードを送信中...</p>
+      </div>
+      <div id="gateFormBtns">
+        <button class="gate-btn gate-btn-primary" onclick="gateSubmitForm()">パスワードを受け取る</button>
+        <button class="gate-btn gate-btn-secondary" onclick="gateBackToA()">← 戻る</button>
+      </div>
+    </div>
+
+    <!-- ──── Step C: PASS入力 ──── -->
+    <div class="gate-pass" id="gateStepC">
+      <h2>🔑 パスワードを入力</h2>
+      <p class="gate-pass-msg" id="gatePassMsg">メールアドレスにパスワードを送信しました。<br>届いたパスワードを入力して結果を確認してください。</p>
+      <div class="gate-pass-row">
+        <input class="gate-pass-input" id="gf-pass" type="text" maxlength="6" placeholder="000000"
+               oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+        <button class="gate-btn gate-btn-primary" style="width:auto;padding:12px 20px;" onclick="gateCheckPass()">確認</button>
+      </div>
+      <div class="gate-pass-err" id="gatePassErr">パスワードが正しくありません。メールをご確認ください。</div>
+      <p class="gate-resend">メールが届かない場合は <a onclick="gateResend()">再送する</a></p>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
